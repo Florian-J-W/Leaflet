@@ -51,7 +51,7 @@ var omap = L.tileLayer.provider('SafeCast');
 
 // for using the two base maps in the layer control, I defined a baseMaps variable
 var baseMaps = {
-	"OpenStreetMap": osmap
+	"OpenStreetMap": osmap,
 	"Dark": Stadia_AlidadeSmoothDark,
 	"Terrain" : Stadia_StamenTerrain
     //"OpenRailMap": otmap
