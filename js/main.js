@@ -196,7 +196,7 @@ var rettenkogel = L.geoJson(rettenkogel, {
     }
 });
 var gruenstein = L.geoJson(gruen, {
-    style: easystyle,
+    style: mediumstyle,
     onEachFeature: function (feature, layer) {
         var popupContent = getPopupContent(feature);
         layer.bindPopup(popupContent);
@@ -322,7 +322,7 @@ var geoJsonLayers = [
     { geoJson: stauffen, style: mediumstyle},
     { geoJson: gruber, style: easystyle },
     { geoJson: rettenkogel, style: { mediumstyle }},
-    { geoJson: gruenstein, style: easystyle },
+    { geoJson: gruenstein, style: mediumstyle },
     { geoJson: funtenseetauern, style: difficultstyle },
     { geoJson: wasseralm_abstieg, style: mediumstyle }
 ];
