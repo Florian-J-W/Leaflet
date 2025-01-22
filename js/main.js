@@ -48,6 +48,9 @@ var baseMaps = {
 L.control.scale({position:'bottomleft',imperial:false}).addTo(map);
 
 
+var easyGroup = L.layerGroup();
+var mediumGroup = L.layerGroup();
+var hardGroup = L.layerGroup();
 
 var easystyle = {
     "color": "#009000",
@@ -64,22 +67,6 @@ var difficultstyle = {
     "weight": 10,
     "opacity": 10
 }
-var entries ={"type":"FeatureCollection",
-    "features":[{"type":"Feature","properties":{"NAME":"Rinnkelndensteig","HEIGHT":"","ACENT":"","Decent":""},"geometry":{"type":"LineString","coordinates":[[13.1,47.1],[13.11,47.12]]}},
-    {"type":"Feature","properties":{"NAME":"Abstieg Ischlerhütte","HEIGHT":"","ACENT":"","Decent":""},"geometry":{"type":"LineString","coordinates":[[13.2,47.2],[13.21,47.22]]}},
-    {"type":"Feature","properties":{"NAME":"Backenstein Appelhaus","HEIGHT":"","ACENT":"","Decent":""},"geometry":{"type":"LineString","coordinates":[[13.3,47.3],[13.31,47.32]]}},
-    {"type":"Feature","properties":{"NAME":"Appelhaus Woising","HEIGHT":"","ACENT":"","Decent":""},"geometry":{"type":"LineString","coordinates":[[13.4,47.4],[13.41,47.42]]}},
-    {"type":"Feature","properties":{"NAME":"Appelhaus Wildgößl","HEIGHT":"","ACENT":"","Decent":""},"geometry":{"type":"LineString","coordinates":[[13.5,47.5],[13.51,47.52]]}},
-    {"type":"Feature","properties":{"NAME":"Untersberg","HEIGHT":"","ACENT":"","Decent":""},"geometry":{"type":"LineString","coordinates":[[13.6,47.6],[13.61,47.62]]}},
-    {"type":"Feature","properties":{"NAME":"Stauffen","HEIGHT":"","ACENT":"","Decent":""},"geometry":{"type":"LineString","coordinates":[[13.7,47.7],[13.71,47.72]]}},
-    {"type":"Feature","properties":{"NAME":"Rettenkogel","HEIGHT":"","ACENT":"","Decent":""},"geometry":{"type":"LineString","coordinates":[[13.8,47.8],[13.81,47.82]]}},
-    {"type":"Feature","properties":{"NAME":"Grünstein","HEIGHT":"","ACENT":"","Decent":""},"geometry":{"type":"LineString","coordinates":[[13.9,47.9],[13.91,47.92]]}},
-    {"type":"Feature","properties":{"NAME":"Funtenseetauern","HEIGHT":"","ACENT":"","Decent":""},"geometry":{"type":"LineString","coordinates":[[14.0,48.0],[14.01,48.02]]}},
-    {"type":"Feature","properties":{"NAME":"Wasseralm Abstieg","HEIGHT":"","ACENT":"","Decent":""},"geometry":{"type":"LineString","coordinates":[[14.1,48.1],[14.11,48.12]]}},
-    {"type":"Feature","properties":{"NAME":"Osterhorngruppe","HEIGHT":"","ACENT":"","Decent":""},"geometry":{"type":"LineString","coordinates":[[14.2,48.2],[14.21,48.22]]}},
-    {"type":"Feature","properties":{"NAME":"Kleioner Göll","HEIGHT":"","ACENT":"","Decent":""},"geometry":{"type":"LineString","coordinates":[[14.3,48.3],[14.31,48.32]]}},
-    {"type":"Feature","properties":{"NAME":"appel","HEIGHT":"","ACENT":"","Decent":""},"geometry":{"type":"LineString","coordinates":[[14.4,48.4],[14.41,48.42]]}},
-    {"type":"Feature","properties":{"NAME":"wsefdasoffensee","HEIGHT":"","ACENT":"","Decent":""},"geometry":{"type":"LineString","coordinates":[[14.5,48.5],[14.51,48.52]]}}]}
 
 function getPopupContent(feature) {
     return `
@@ -215,22 +202,25 @@ var wasseralm_abstieg = L.geoJson(wasseralmabstieg, {
 });
 
 
-offensee.addTo(map);
-appel.addTo(map);
-rinnkel.addTo(map);
-kleinergoell.addTo(map);
-ischlerabstieg.addTo(map);
-anstieg_anniversary.addTo(map);
-woising_anniversary.addTo(map);
-abstiegappel.addTo(map);
-untersberg.addTo(map);
-stauffen.addTo(map);
-gruber.addTo(map);
-rettenkogel.addTo(map);
-gruenstein.addTo(map);
-funtenseetauern.addTo(map);
-wasseralm_abstieg.addTo(map);
+offensee.addTo(mediumGroup);
+appel.addTo(mediumGroup);
+rinnkel.addTo(mediumGroup);
+kleinergoell.addTo(mediumGroup);
+ischlerabstieg.addTo(easyGroup);
+anstieg_anniversary.addTo(easyGroup);
+woising_anniversary.addTo(easyGroup);
+abstiegappel.addTo(mediumGroup);
+untersberg.addTo(mediumGroup);
+stauffen.addTo(mediumGroup);
+gruber.addTo(easyGroup);
+rettenkogel.addTo(mediumGroup);
+gruenstein.addTo(mediumGroup);
+funtenseetauern.addTo(hardGroup);
+wasseralm_abstieg.addTo(mediumGroup);
 
+easyGroup.addTo(map);
+mediumGroup.addTo(map);
+hardGroup.addTo(map);
 
 //
 //---- Part 5: Adding a layer control for base maps and feature layers
@@ -252,7 +242,7 @@ var features = {
     "Funtenseetauern":funtenseetauern,
     "Wasseralm Abstieg":wasseralm_abstieg,
     "Osterhorngruppe": gruber,
-    "Kleioner Göll":kleinergoell
+    "Kleiner Göll":kleinergoell
     }
 
 
@@ -316,7 +306,7 @@ var geoJsonLayers = [
     { geoJson: stauffen, style: mediumstyle},
     { geoJson: gruber, style: easystyle },
     { geoJson: rettenkogel, style: { mediumstyle }},
-    { geoJson: gruenstein, style: mediumstyle },
+    { geoJson: gruenstein, style: easystyle },
     { geoJson: funtenseetauern, style: difficultstyle },
     { geoJson: wasseralm_abstieg, style: mediumstyle }
 ];
@@ -336,8 +326,16 @@ geoJsonLayers.forEach(function (item) {
 });
 
 
+easyGroup.addTo(map);
+mediumGroup.addTo(map);
+hardGroup.addTo(map); // Add only if you want "Hard" shown by default
 
-L.control.layers(baseMaps, features,{position:'bottomright'}).addTo(map);
+var overlays = {
+    "Easy": easyGroup,
+    "Medium": mediumGroup,
+    "Hard": hardGroup
+  };
+L.control.layers(baseMaps, overlays,{position:'topright'}).addTo(map);
 
 
 
