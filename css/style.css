@@ -21,11 +21,27 @@ h1 {
 }
 
 
+  
+.info.legend {
+margin-bottom: 40px; /* push it up from the bottom */
+margin-right: 20px;  /* push it left from the right edge */
+background: rgb(231, 227, 227);       /* Black background */
+color: #1f1e1e;             /* White text (so it’s visible on black) */
+font-weight: bold;       /* Make text bold */
+padding: 10px;
+line-height: 1.5;
+border-radius: 4px;
+box-shadow: 0 0 8px rgba(0,0,0,0.2);
+ 
+}
+
+  
 
 #map {
-	height:98%;
-	width:98%;
-	left:1%;
+	
+	width:100%;
+    height: 85%;
+	
 	overflow:hidden;
 	position:fixed;
 	border:1px #444 solid;
