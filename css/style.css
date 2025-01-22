@@ -1,0 +1,32 @@
+body {
+    margin: 0; /* Remove default body margin */
+    padding: 0; /* Remove default body padding */
+    background-color: #2b2525; /* Black background */
+    color: #fff; /* Optional: Default text color as white for visibility */
+    font-family: Arial, sans-serif; /* Optional: Set a default font */
+}
+
+h1 {
+    text-align: center;
+    font-size: 4em;
+    color: #562f1c;
+    margin: 15px 0;
+    padding: 15px;
+    background-color: #628675;
+    border-radius: 10px;
+    box-shadow: 0 20px 6px rgba(0, 0, 0, 0.1);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold; /* Make the text bold */
+
+}
+
+
+
+#map {
+	height:98%;
+	width:98%;
+	left:1%;
+	overflow:hidden;
+	position:fixed;
+	border:1px #444 solid;
+}
