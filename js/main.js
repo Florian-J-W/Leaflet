@@ -16,6 +16,13 @@ var Stadia_AlidadeSmoothDark = L.tileLayer(
   }
 );
 
+var Stadia_StamenTerrain = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_terrain/{z}/{x}/{y}{r}.{ext}?api_key=c061ec6a-8bc7-44e9-923b-f469cecfecd9', {
+	minZoom: 0,
+	maxZoom: 18,
+	attribution: '&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+	ext: 'png'
+});
+
 //creating the map; defining the location in the center of the map (geographic coords) and the zoom level. These are properties 
 //of the leaflet map object L.map.
 //the map window has been given the id 'map' in the .html file
@@ -24,7 +31,7 @@ var map = L.map('map', {
 	center: [47.6, 13.30],
 	zoom: 10
 });
-
+Stadia_StamenTerrain.addTo(map)
 Stadia_AlidadeSmoothDark.addTo(map);
 
 // alternatively the setView method could be used for placing the map in the window
@@ -53,7 +60,8 @@ var omap = L.tileLayer.provider('SafeCast');
 // for using the two base maps in the layer control, I defined a baseMaps variable
 var baseMaps = {
 	"OpenStreetMap": osmap,
-	"Stadia Dark": Stadia_AlidadeSmoothDark
+	"Dark": Stadia_AlidadeSmoothDark,
+	"Terrain" : Stadia_StamenTerrain
     //"OpenRailMap": otmap
 }
 
