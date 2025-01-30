@@ -47,14 +47,13 @@ var osmap = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 var otmap = L.tileLayer.provider('OpenRailwayMap');
 var omap = L.tileLayer.provider('SafeCast');
 
-//var ormap = L.tileLayer.provider('OpenRailwayMap');
 
 // for using the two base maps in the layer control, I defined a baseMaps variable
 var baseMaps = {
 	"OpenStreetMap": osmap,
 	"Dark": Stadia_AlidadeSmoothDark,
 	"Terrain" : Stadia_StamenTerrain
-    //"OpenRailMap": otmap
+   
 }
 
 //
@@ -83,7 +82,7 @@ var difficultstyle = {
     "weight": 10,
     "opacity": 10
 }
-
+//function for all popups
 function getPopupContent(feature) {
     return `
         <div style="
@@ -238,29 +237,6 @@ easyGroup.addTo(map);
 mediumGroup.addTo(map);
 hardGroup.addTo(map);
 
-//
-//---- Part 5: Adding a layer control for base maps and feature layers
-//
-
-//the variable features lists layers that I want to control with the layer control
-var features = {
-    "appel" : appel,
-	"Offensee" : offensee,
-    "Rinnkelndensteig" :rinnkel,
-    "Abstieg Ischlerhütte" :ischlerabstieg,
-    "Backenstein Appelhaus": anstieg_anniversary,
-    "Appelhaus Woising":woising_anniversary,
-    "Appelhaus Wildgößl": abstiegappel,
-    "Untersberg":untersberg,
-    "Stauffen":stauffen,
-    "Rettenkogel": rettenkogel,
-    "Grünstein":gruenstein,
-    "Funtenseetauern":funtenseetauern,
-    "Wasseralm Abstieg":wasseralm_abstieg,
-    "Osterhorngruppe": gruber,
-    "Kleiner Göll":kleinergoell
-    }
-
 
 // Function to highlight the feature
 function highlightFeature(e) {
@@ -291,7 +267,7 @@ function zoomToFeature(e) {
     map.fitBounds(e.target.getBounds());
 }
 
-// Function to store the original style of the layer
+// Function to store the "original" style of the layer
 function storeOriginalStyle(layer) {
     if (!layer.options.originalStyle) {
         layer.options.originalStyle = { ...layer.options.style }; // Clone the original style
